@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
-ul{
-    display: inline;
-    margin: auto;
+ul li {    
+     @apply rounded py-[3px] px-[10px] text-[17px]
+     hover:bg-slate-400 transition-all duration-300
 }
+
