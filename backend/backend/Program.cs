@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using backend.Data;
+using backend.Repository.Irepository;
+using backend.Repository;
+using backend.Logging;
 
 namespace backend
 {
@@ -8,11 +11,17 @@ namespace backend
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            
+
+            builder.Services.AddAutoMapper(typeof(MappingConfig));
+
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+            builder.Services.AddSingleton<Ilogging, logging>();
+
             builder.Services.AddDbContext<ApplicationDbContext>(
             option =>
             {
-                option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
+                option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString"));
             }
             );
 

@@ -16,7 +16,7 @@ namespace backend.Models
         [Required]
         public string Email { get; set; } 
 
-        public int age { get; set; }
+        public int Age { get; set; }
 
         [Required]
         public string Password { get; set; }

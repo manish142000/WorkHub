@@ -74,3 +74,5 @@ D:\workhub\backend\backend\obj\Debug\net7.0\refint\backend.dll
 D:\workhub\backend\backend\obj\Debug\net7.0\backend.pdb
 D:\workhub\backend\backend\obj\Debug\net7.0\backend.genruntimeconfig.cache
 D:\workhub\backend\backend\obj\Debug\net7.0\ref\backend.dll
+D:\workhub\backend\backend\bin\Debug\net7.0\AutoMapper.dll
+D:\workhub\backend\backend\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
