@@ -44,25 +44,24 @@ namespace backend.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<APIResponse>> CreateUserAsync([FromBody] UserCreateDto user )
+        public async Task<ActionResult<APIResponse>> CreateUserAsync([FromBody] UserCreateDto user)
         {
             try
             {
 
                 if (user == null)
                 {
-                    _logger.Log("user null hai", "Error");
                     return StatusCode(StatusCodes.Status500InternalServerError);
                 }
 
-                if (await _dbUser.Get(u => u.Name == user.Name) != null)
+                if (await _dbUser.Get(u => u.Email == user.Email) != null)
                 {
                     _response.IsSuccess = false;
                     ModelState.AddModelError("CustomError", "User Already exists");
                     return BadRequest();
                 }
 
-                if( user.Password != user.ConfirmPassword)
+                if (user.Password != user.ConfirmPassword)
                 {
                     _response.IsSuccess = false;
                     _response.ErrorsMessages = new List<string>() { "The passwords Do not match" };
@@ -70,15 +69,9 @@ namespace backend.Controllers
                     return _response;
                 }
 
-                _logger.Log("Yaha aa rha 1", "");
-
                 User model = _mapper.Map<User>(user);
 
-                _logger.Log("Yaha aa rha 2", "");
-
                 await _dbUser.Create(model);
-
-                _logger.Log("Yaha aa rha 3", "");
 
                 _response.Result = model;
                 _response.StatusCode = HttpStatusCode.Created;
@@ -90,6 +83,38 @@ namespace backend.Controllers
                 _response.IsSuccess = false;
                 _response.ErrorsMessages = new List<string>() { ex.ToString() };
             }
+
+            return _response;
+        }
+
+        [Route("login")]
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<APIResponse>> LoginUser([FromBody] LoginDto credentials)
+        {
+
+
+            User model = await _dbUser.Get(u => u.Email == credentials.Email);
+
+            if (model == null)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorsMessages = new List<string>() { "No such user with Email id exists" };
+                _response.StatusCode = HttpStatusCode.BadRequest;
+            }
+
+            if (model.Password != credentials.Password)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorsMessages = new List<string>() { "Invalid Password" };
+                _response.StatusCode = HttpStatusCode.BadRequest;
+            }
+
+            _response.IsSuccess = true;
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.Result = credentials.Email;
 
             return _response;
         }
