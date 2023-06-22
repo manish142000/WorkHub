@@ -12,9 +12,17 @@ namespace backend
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(p=>p.AddPolicy("corspolicy", build =>
+            {
+                build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+            } ));
+
             builder.Services.AddAutoMapper(typeof(MappingConfig));
 
+            
+
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
             builder.Services.AddSingleton<Ilogging, logging>();
 
@@ -34,6 +42,8 @@ namespace backend
 
             var app = builder.Build();
 
+            app.UseCors("corspolicy");
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -44,6 +54,13 @@ namespace backend
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+            app.UseRouting();
+
+            if (app.Environment.IsDevelopment())
+            {
+                app.MapGet("/debug/routes", (IEnumerable<EndpointDataSource> endpointSources) =>
+                    string.Join("\n", endpointSources.SelectMany(source => source.Endpoints)));
+            }
 
 
             app.MapControllers();

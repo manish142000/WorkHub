@@ -1,5 +1,31 @@
-
-<input type="text"
+<!--<input  [formControl]="controls" [mask] = 'format'
 class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
-  duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
-placeholder="Enter Name" />
+    duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+   [placeholder]="placeholder" [type]="type" >
+-->
+
+<input [formControl]="controls" [placeholder]="placeholder" [type]="type"  class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400" >
+
+<ng-container *ngIf="controls.dirty&&controls.touched" >
+  <p *ngIf="controls.errors?.pattern" class="text-red-400">
+    The password must be at least 8 characters,
+    must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number.  
+  </p> 
+  <p *ngIf="controls.errors?.required" class="text-red-400" >
+    Field is required 
+  </p>
+  <p *ngIf="controls.errors?.minlength" class="text-red-400" >
+    The value you entered is {{ controls.errors?.minlength.actualLength }} characters long. 
+    It must be atleast {{ controls.errors?.minlength.requiredLength }} characters long.
+  </p>
+  <p *ngIf="controls.errors?.email" class="text-red-400">
+    Enter a valid email
+  </p>
+  <p *ngIf="controls.errors?.min" class="text-red-400" >
+    Value too low. Should be atleast 18.
+  </p>
+  <p *ngIf="controls.errors?.max" class="text-red-400">
+    Value too high. Should be atmost 120.
+  </p>
+</ng-container>

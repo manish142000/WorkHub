@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^16.0.0",
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
+    "bcryptjs": "^2.4.3",
+    "ngx-mask": "^16.1.8",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
@@ -28,6 +30,7 @@
     "@angular-devkit/build-angular": "^16.0.4",
     "@angular/cli": "~16.0.4",
     "@angular/compiler-cli": "^16.0.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
@@ -37,5 +40,17 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "tailwindcss": "^3.3.2",
     "typescript": "~5.0.2"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false,
+    "crypto": false,
+    "stream": false,
+    "http": false,
+    "tls": false,
+    "zlib": false,
+    "https": false,
+    "net": false
   }
 }

@@ -48,6 +48,7 @@ namespace backend.Controllers
         {
             try
             {
+                _logger.Log("Yaha aa rha", "");
 
                 if (user == null)
                 {
@@ -103,6 +104,7 @@ namespace backend.Controllers
                 _response.IsSuccess = false;
                 _response.ErrorsMessages = new List<string>() { "No such user with Email id exists" };
                 _response.StatusCode = HttpStatusCode.BadRequest;
+                return _response;
             }
 
             if (model.Password != credentials.Password)
@@ -110,6 +112,7 @@ namespace backend.Controllers
                 _response.IsSuccess = false;
                 _response.ErrorsMessages = new List<string>() { "Invalid Password" };
                 _response.StatusCode = HttpStatusCode.BadRequest;
+                return _response;
             }
 
             _response.IsSuccess = true;

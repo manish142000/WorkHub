@@ -1,6 +1,8 @@
-﻿namespace backend.Repository.Irepository
+﻿using backend.Models;
+
+namespace backend.Repository.Irepository
 {
-    public interface IOrderRepository
+    public interface IOrderRepository : IRepository<Order>
     {
     }
 }
