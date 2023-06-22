@@ -1,4 +1,7 @@
 ﻿using System.Net;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security;
+using System.Security.Claims;
 
 namespace backend.Models
 {
@@ -11,5 +14,7 @@ namespace backend.Models
         public List<string> ErrorsMessages { get; set; }
 
         public object Result { get; set; }
+
+        public string JwtToken { get; set; }
     }
 }

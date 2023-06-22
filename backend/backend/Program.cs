@@ -3,6 +3,9 @@ using backend.Data;
 using backend.Repository.Irepository;
 using backend.Repository;
 using backend.Logging;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace backend
 {
@@ -18,6 +21,25 @@ namespace backend
             } ));
 
             builder.Services.AddAutoMapper(typeof(MappingConfig));
+
+            builder.Services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(option =>
+            {
+                option.SaveToken = true;
+                option.RequireHttpsMetadata = false;
+                option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = builder.Configuration["JWT:ValidAudience"],
+                    ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+                };
+            });
 
             
 
@@ -52,15 +74,16 @@ namespace backend
             }
 
             app.UseHttpsRedirection();
-
-            app.UseAuthorization();
+            app.UseAuthentication();
             app.UseRouting();
+            app.UseAuthorization();
 
-            if (app.Environment.IsDevelopment())
+
+            /*if (app.Environment.IsDevelopment())
             {
                 app.MapGet("/debug/routes", (IEnumerable<EndpointDataSource> endpointSources) =>
                     string.Join("\n", endpointSources.SelectMany(source => source.Endpoints)));
-            }
+            }*/
 
 
             app.MapControllers();

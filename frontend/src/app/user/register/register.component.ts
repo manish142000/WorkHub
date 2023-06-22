@@ -4,7 +4,7 @@ import { ConfirmPassword } from 'src/app/shared/validators';
 import { HttpClient } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import * as bcrypt from 'bcryptjs';
+import { getHashedPassword } from 'src/app/shared/hashing';
 
 @Component({
   selector: 'app-register',
@@ -20,6 +20,8 @@ export class RegisterComponent {
       private http : HttpClient 
     ) {
     }
+
+
 
     registerForm = new FormGroup({
       name : new FormControl("", [
@@ -78,16 +80,22 @@ export class RegisterComponent {
         return;
        }
 
+      if( !password || !confirm_password ){
+        return;
+      }
        //encrypting password
-       password = bcrypt.hashSync(password as string, 14); 
-      
+       password = getHashedPassword(password); 
+       confirm_password = getHashedPassword(confirm_password);
+
+       console.log(password);
+       console.log(confirm_password);
 
        var formdata = {
         'Name' : name, 
         'Email' : email,
         'Age' : age,
         'Password' : password,
-        'ConfirmPassword' : password,
+        'ConfirmPassword' : confirm_password,
         'Phone' : phoneno
        }
 

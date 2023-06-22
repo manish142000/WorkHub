@@ -9,6 +9,7 @@ namespace backend
         public MappingConfig()
         {
             CreateMap<UserCreateDto, User>().ReverseMap(); 
+            CreateMap<OrderDto, Order>().ReverseMap();
         }
     }
 }

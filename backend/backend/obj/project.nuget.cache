@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xplma8FNTeLuDMth00nVQ2IFEfQdEjd8gtq+fzgpLkOGGhmQk/O/M7dYXqvhiklGUIs4nxlsNRoeWF+CbFFiWg==",
+  "dgSpecHash": "SNzmIQXLeCU+aAtBPLitLbBgtTrzoRS3EUeLmDpP3NoED/wTp/dEplega6/y4VYIT9yeZuYrmDPC0sgdjO0IAg==",
   "success": true,
   "projectFilePath": "D:\\workhub\\backend\\backend\\backend.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "C:\\Users\\G3\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.0.0\\microsoft.aspnetcore.antiforgery.2.0.0.nupkg.sha512",
     "C:\\Users\\G3\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.0.0\\microsoft.aspnetcore.authentication.abstractions.2.0.0.nupkg.sha512",
     "C:\\Users\\G3\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.0.0\\microsoft.aspnetcore.authentication.core.2.0.0.nupkg.sha512",
+    "C:\\Users\\G3\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.7\\microsoft.aspnetcore.authentication.jwtbearer.7.0.7.nupkg.sha512",
     "C:\\Users\\G3\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.0.0\\microsoft.aspnetcore.authorization.2.0.0.nupkg.sha512",
     "C:\\Users\\G3\\.nuget\\packages\\microsoft.aspnetcore.authorization.policy\\2.0.0\\microsoft.aspnetcore.authorization.policy.2.0.0.nupkg.sha512",
     "C:\\Users\\G3\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",

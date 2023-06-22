@@ -6,8 +6,12 @@ using backend.Models.Dto;
 using backend.Repository.Irepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Net;
-
+using System.Security.Claims;
+using System.Text;
 
 namespace backend.Controllers
 {
@@ -25,8 +29,11 @@ namespace backend.Controllers
 
         private readonly IUserRepository _dbUser;
 
+        private readonly IConfiguration _config;
+
+
         public WorkhubController( ApplicationDbContext db, Ilogging logger, IMapper mapper,
-            IUserRepository dbuser
+            IUserRepository dbuser, IConfiguration config 
             )
         {
             _logger = logger;
@@ -38,7 +45,10 @@ namespace backend.Controllers
             _mapper = mapper;
 
             _dbUser = dbuser;
+
+            _config = config;
         }
+
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -48,7 +58,7 @@ namespace backend.Controllers
         {
             try
             {
-                _logger.Log("Yaha aa rha", "");
+                //_logger.Log("Yaha aa rha", "");
 
                 if (user == null)
                 {
@@ -96,7 +106,7 @@ namespace backend.Controllers
         public async Task<ActionResult<APIResponse>> LoginUser([FromBody] LoginDto credentials)
         {
 
-
+          
             User model = await _dbUser.Get(u => u.Email == credentials.Email);
 
             if (model == null)
@@ -114,10 +124,27 @@ namespace backend.Controllers
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 return _response;
             }
+           
+            var claims = new[] {
+                        new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        //new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                        new Claim("Email", credentials.Email)
+                    };
+          
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Secret"]));
+            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                _config["JWT:ValidIssuer"],
+                _config["JWT:ValidAudience"],
+                claims,
+                expires: DateTime.UtcNow.AddHours(1),
+                signingCredentials: signIn);
 
             _response.IsSuccess = true;
             _response.StatusCode = HttpStatusCode.OK;
             _response.Result = credentials.Email;
+            _response.JwtToken = new JwtSecurityTokenHandler().WriteToken(token);
 
             return _response;
         }
