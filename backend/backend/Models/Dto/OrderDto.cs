@@ -7,10 +7,17 @@ namespace backend.Models.Dto
         [Required]
         public string UserEmail { get; set; }
 
-        [Required]
-        public string OrderType { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        public DateTime DateCreated { get; set; }
 
         [Required]
-        public string FoodType { get; set; }
+        public DayOfWeek DayCreated { get; set; }
+
+        [Required]
+        public string Lunch { get; set; }
+
+        [Required]
+        public string Breakfast { get; set; }
+
     }
 }

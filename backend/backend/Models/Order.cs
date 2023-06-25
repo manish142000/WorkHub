@@ -14,12 +14,19 @@ namespace backend.Models
 
         public User user { get; set; }
 
-        // breakfast, lunch, dinner 
-        [Required]
-        public string OrderType { get; set; }
+        //Veg, Non-Veg
+        public string Breakfast { get; set; }
+        
+        //Veg, Non-Veg
+        public string Lunch { get; set; }
 
-        // veg, Nonveg
-        [Required]
-        public string FoodType { get; set; } 
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        public DateTime DateCreated { get; set; }
+
+
+        public DayOfWeek DayCreated { get; set; }
+
+        
     }
 }

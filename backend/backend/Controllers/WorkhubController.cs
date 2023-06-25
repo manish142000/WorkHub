@@ -3,6 +3,7 @@ using backend.Data;
 using backend.Logging;
 using backend.Models;
 using backend.Models.Dto;
+using backend.Models.Responses;
 using backend.Repository.Irepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -84,8 +85,26 @@ namespace backend.Controllers
 
                 await _dbUser.Create(model);
 
-                _response.Result = model;
-                _response.StatusCode = HttpStatusCode.Created;
+                var claims = new[] {
+                        new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        //new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                        new Claim("Email", user.Email)
+                    };
+
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Secret"]));
+                var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var token = new JwtSecurityToken(
+                    _config["JWT:ValidIssuer"],
+                    _config["JWT:ValidAudience"],
+                    claims,
+                    expires: DateTime.UtcNow.AddHours(1),
+                    signingCredentials: signIn);
+
+                _response.IsSuccess = true;
+                _response.StatusCode = HttpStatusCode.OK;
+                _response.Result = user.Email;
+                _response.JwtToken = new JwtSecurityTokenHandler().WriteToken(token);
 
                 return _response;
             }
