@@ -1,25 +1,29 @@
-          <!-- Login Form -->
-          <form [formGroup]="LoginForm" >
-            <!-- Email -->
-            <div class="mb-3">
-              <label class="inline-block mb-2 text-white">Email</label>
-              <input [formControl]="LoginForm.controls.email" type="email"
-                class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
-                  duration-500 focus:outline-none rounded bg-transparent
-                  focus:border-indigo-400"
-                placeholder="Enter Email" />
-            </div>
-            <!-- Password -->
-            <div class="mb-3">
-              <label class="inline-block mb-2 text-white">Password</label>
-              <input type="password" [formControl]="LoginForm.controls.password"
-                class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
-                duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
-                placeholder="Password" />
-            </div>
-            <button type="submit"
-              class="block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition
-                hover:bg-indigo-500">
-              Submit
-            </button>
-          </form>
+<app-alert [color]="alert_color" [hidden]="!showAlert" >
+  {{ alert_msg }}
+</app-alert>
+
+<!-- Login Form -->
+<form [formGroup]="LoginForm" (ngSubmit)="login()" >
+  <!-- Email -->
+  <div class="mb-3">
+    <label class="inline-block mb-2 text-white">Email</label>
+    <input [formControl]="LoginForm.controls.email" type="email"
+      class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+        duration-500 focus:outline-none rounded bg-transparent
+        focus:border-indigo-400"
+      placeholder="Enter Email" />
+  </div>
+  <!-- Password -->
+  <div class="mb-3">
+    <label class="inline-block mb-2 text-white">Password</label>
+    <input type="password" [formControl]="LoginForm.controls.password"
+      class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
+      duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+      placeholder="Password" />
+  </div>
+  <button type="submit"
+    class="block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition
+      hover:bg-indigo-500">
+    Submit
+  </button>
+</form>

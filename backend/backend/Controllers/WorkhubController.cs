@@ -13,6 +13,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using System.Threading;
 
 namespace backend.Controllers
 {
@@ -59,7 +60,7 @@ namespace backend.Controllers
         {
             try
             {
-                //_logger.Log("Yaha aa rha", "");
+                _logger.Log("Yaha aa rha", "");
 
                 if (user == null)
                 {
@@ -105,6 +106,9 @@ namespace backend.Controllers
                 _response.StatusCode = HttpStatusCode.OK;
                 _response.Result = user.Email;
                 _response.JwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+                TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+                DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(token.ValidTo, cstZone);
+                _response.ExpirationDate = cstTime;
 
                 return _response;
             }
@@ -125,7 +129,7 @@ namespace backend.Controllers
         public async Task<ActionResult<APIResponse>> LoginUser([FromBody] LoginDto credentials)
         {
 
-          
+            _logger.Log("Enter ho rha!", "");
             User model = await _dbUser.Get(u => u.Email == credentials.Email);
 
             if (model == null)
@@ -164,6 +168,10 @@ namespace backend.Controllers
             _response.StatusCode = HttpStatusCode.OK;
             _response.Result = credentials.Email;
             _response.JwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+            TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+            DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(token.ValidTo, cstZone);
+            _response.ExpirationDate = cstTime;
+           
 
             return _response;
         }

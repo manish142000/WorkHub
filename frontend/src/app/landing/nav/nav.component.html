@@ -5,8 +5,11 @@
     <label class="text-white text-3xl md-leading-[80px] leading-[80px] pl-12 md-text-4xl text-xl">Workhub</label>
     <ul class="navList float-right lg:flex lg:relative leading-[80px] mr-10 text-slate-300 uppercase rounded fixed 
     h-[13.3vh]" >
-        <li><a class="pl-4 pr-6 hover:text-white hover:cursor-pointer" (click) = "openModal($event)" >Login/Register</a></li>
-        <li><a class="pl-4 pr-6 hover:text-white hover:cursor-pointer">About</a></li>
-        <li><a class="pl-4 pr-10 hover:text-white hover:cursor-pointer">Contact</a></li>
+        <li><a class="pl-4 pr-6 hover:text-white hover:cursor-pointer" *ngIf="!(auth.isAuthenticated$ | async) else authenticatedLinks"  (click) = "openModal($event)">Login/Register</a></li>
+        <ng-template #authenticatedLinks>
+            <li class="inline" ><a class="pl-4 pr-6 hover:text-white hover:cursor-pointer">Orders</a></li>
+            <li class="inline" ><a class="pl-4 pr-10 hover:text-white hover:cursor-pointer">History</a></li>
+            <li class="inline"><a (click)=(logout()) class="pl-4 pr-10 hover:text-white hover:cursor-pointer">LogOut</a></li>
+        </ng-template>
     </ul>
 </nav>

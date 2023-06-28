@@ -1,0 +1,82 @@
+.form{
+    margin: auto;
+    margin-top: 30px;
+    min-height: 500px;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    flex-direction: column;
+    border: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: black;
+    padding-top: 20px;
+    position: relative;
+}
+
+.container {
+    padding: 7% 7%;
+    left: 3%;
+    top : 4%;
+}
+
+
+#lunchVeglabel{
+    position: absolute;
+    left: 42%;
+}
+
+#lunchVegoption{
+    position: absolute;
+    left: 40%;
+}
+
+#lunchNonVeglabel{
+    position: absolute;
+    left: 65%;
+}
+
+#lunchNonVegoption{
+    position: absolute;
+    left: 60%;
+}
+
+#breakfastVeglabel{
+    position: absolute;
+    left: 46%;
+}
+
+#breakfastVegoption{
+    position: absolute;
+    left: 40%;
+}
+
+.btn{
+    position: absolute;
+    border: solid;
+    border-radius: 2px;
+    top: 85%;
+    width: 40%;
+    text-align: center;
+    background-color: rgb(167, 163, 163);
+    border-radius: 3px;
+    border-width: 2px;
+}
+
+.btn :hover{
+    color: white;
+}
+
+#top{
+    position: absolute;
+    font-size: 30px;
+    top: 15%;
+    padding-bottom: 2%;
+}
+
+#day{
+    position: absolute;
+    left : 40%;
+}

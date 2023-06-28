@@ -28,6 +28,7 @@ import { AlertComponent } from './alert/alert.component';
     TabsComponent,
     TabscontainerComponent,
     AlertComponent
-  ]
+  ],
+  providers : [provideEnvironmentNgxMask()]
 })
 export class SharedModule { }

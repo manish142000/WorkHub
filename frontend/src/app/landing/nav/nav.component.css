@@ -2,6 +2,5 @@
 
 ul li {    
      @apply rounded py-[3px] px-[10px] text-[17px]
-     hover:bg-slate-400 transition-all duration-300
+     /*hover:bg-slate-400 transition-all duration-300*/
 }
-

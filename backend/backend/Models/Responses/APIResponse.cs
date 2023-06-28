@@ -16,5 +16,7 @@ namespace backend.Models
         public object Result { get; set; }
 
         public string JwtToken { get; set; }
+
+        public DateTime ExpirationDate { get; set; }
     }
 }

@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { getHashedPassword } from 'src/app/shared/hashing';
+import { SignUpData } from 'src/app/interfaces/sign-up-data';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +19,8 @@ export class RegisterComponent {
      *
      */
     constructor( 
-      private http : HttpClient 
+      private http : HttpClient,
+      private auth : AuthService 
     ) {
     }
 
@@ -32,7 +35,7 @@ export class RegisterComponent {
         Validators.email,
         Validators.required
       ]),
-      age : new FormControl("", [
+      age : new FormControl<number | null>(null, [
         Validators.required,
         Validators.min(18),
         Validators.max(120)
@@ -56,65 +59,64 @@ export class RegisterComponent {
     alert_color = 'blue';
     in_submission = false;
 
+    setAlert(
+      alert_msg : string, 
+      alert_color : string, 
+      showAlert : boolean, 
+      in_submission : boolean 
+    ){
+      this.alert_msg = alert_msg; this.alert_color = alert_color; this.showAlert  = showAlert; this.in_submission = in_submission;
+    }
+
     register(){
-      this.alert_msg = "Please wait... Your account is being created";
-      this.alert_color = "blue";
-      this.showAlert = true;
-      this.in_submission = true;
 
-      var  {
-        name, 
-        email, 
-        age, 
-        password,
-        confirm_password,
-        phoneno
-       } = this.registerForm.value 
+      this.setAlert("Please wait... Your account is being created", "blue", true, true);
 
-       if( password != confirm_password ){
-        this.alert_msg = "Passwords DO NOT Match";
-        this.alert_color = "Red";
-        this.showAlert = true;
-        this.in_submission = false;
+      const form_data : SignUpData = {
+        Name : this.registerForm.value.name,
+        Email : this.registerForm.value.email,
+        Age : this.registerForm.value.age,
+        Password : this.registerForm.value.password,
+        ConfirmPassword : this.registerForm.value.confirm_password,
+        Phone : this.registerForm.value.phoneno
+      };
 
+
+       if( form_data.Password != form_data.ConfirmPassword ){
+        this.setAlert("Passwords DO NOT Match", "red", true, false);
         return;
        }
 
-      if( !password || !confirm_password ){
+      if( !form_data.Password || !form_data.ConfirmPassword ){
         return;
       }
        //encrypting password
-       password = getHashedPassword(password); 
-       confirm_password = getHashedPassword(confirm_password);
+       //form_data.Password = getHashedPassword(form_data.Password); 
+       //form_data.ConfirmPassword = getHashedPassword(form_data.ConfirmPassword);
 
-       console.log(password);
-       console.log(confirm_password);
+       console.log(form_data);
+      
+        this.auth.signUp(form_data).subscribe(
+        (response) => { 
+          console.log("Ye subscriber ke ander ka response hai! ", response);
+          if( response.isSuccess == false ){
+            this.setAlert("User Already Exists!", "red", true, false);
+            this.registerForm.reset();
+          }
+          else {
+            this.setAlert("Your account has been created!", "green", true, false);
 
-       var formdata = {
-        'Name' : name, 
-        'Email' : email,
-        'Age' : age,
-        'Password' : password,
-        'ConfirmPassword' : confirm_password,
-        'Phone' : phoneno
-       }
+            this.registerForm.reset();
 
-       this.http.post('https://localhost:7032/api/employee', formdata).subscribe(
-        (response) => { console.log(response) 
-          this.alert_msg = "Your account has been created!";
-          this.alert_color = "green";
-          this.showAlert = true;
-          this.in_submission = false; 
-
-          setTimeout( () => {
-            this.alert_msg = "";
-            this.showAlert = false; 
-            this.alert_color = 'blue';
-            this.in_submission = false;            
-          }, 2000 );
-          
+            setTimeout( () => {
+              this.setAlert("", "blue", false, false);          
+            }, 2000 );
+          }
         },
-        (error) => { console.log(error) 
+        (error) => { 
+          console.log(error);
+          this.setAlert("An error Occured! Please try Again!", "red", true, false);  
+          this.registerForm.reset();          
         }
       )
 
