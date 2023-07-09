@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 import { LoginData } from 'src/app/interfaces/login-data';
 import { AuthService } from 'src/app/services/auth.service';
 import { getHashedPassword } from 'src/app/shared/hashing';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ import { getHashedPassword } from 'src/app/shared/hashing';
 export class LoginComponent {
 
     constructor(
-      private auth : AuthService
+      private auth : AuthService,
+      private route : Router
     ) {
             
     }
@@ -71,6 +73,10 @@ export class LoginComponent {
           else{
             this.setAlert(response.errorMessages?.at(0), "red", true, false);
           }
+
+          setTimeout( () => {
+            this.route.navigate(["history"]);
+          }, 1500);
         }
        )
     } 

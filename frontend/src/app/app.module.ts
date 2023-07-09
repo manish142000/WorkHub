@@ -9,10 +9,29 @@ import { HTTP_INTERCEPTORS, HttpClientModule, HttpInterceptor } from '@angular/c
 import { OrderModule } from './order/order.module';
 import { AuthInterceptorInterceptor } from './interceptors/auth-interceptor.interceptor';
 import { CookieService } from 'ngx-cookie-service';
+import { HistoryModule } from './history/history.module';
+import { MatTableModule  } from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
+import { RouterModule, Routes } from '@angular/router';
+import { NavComponent } from './landing/nav/nav.component';
+import { OrderComponent } from './order/order/order.component';
+import { ChartComponent } from './history/chart/chart.component';
+import { AuthModalComponent } from './user/auth-modal/auth-modal.component';
+import { ProfileComponent } from './shared/profile/profile.component';
+import { SharedModule } from './shared/shared.module';
+
+const appRoute : Routes = [ 
+  { path : "authenticate", component : AuthModalComponent },
+  { path : "order", component : OrderComponent },
+  { path : "history", component : ChartComponent },
+]
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,7 +40,15 @@ import { CookieService } from 'ngx-cookie-service';
     UserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    OrderModule
+    OrderModule,
+    HistoryModule,
+    MatTableModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    SharedModule,
+    RouterModule.forRoot(appRoute)
   ],
   providers: [
     { 

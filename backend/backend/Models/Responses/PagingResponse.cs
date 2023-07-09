@@ -13,5 +13,7 @@ namespace backend.Models.Responses
 
 
         public List<PagingData> pagingData { get; set; }
+
+        public int pagingLength { get; set; }
     }
 }

@@ -7,6 +7,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { getHashedPassword } from 'src/app/shared/hashing';
 import { SignUpData } from 'src/app/interfaces/sign-up-data';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ export class RegisterComponent {
      */
     constructor( 
       private http : HttpClient,
-      private auth : AuthService 
+      private auth : AuthService,
+      private route : Router 
     ) {
     }
 
@@ -111,6 +113,10 @@ export class RegisterComponent {
             setTimeout( () => {
               this.setAlert("", "blue", false, false);          
             }, 2000 );
+
+            setTimeout( () => {
+              this.route.navigate(["history"]);
+            }, 1500);
           }
         },
         (error) => { 

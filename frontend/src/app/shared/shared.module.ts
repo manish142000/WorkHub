@@ -7,6 +7,7 @@ import { TabscontainerComponent } from './tabscontainer/tabscontainer.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { provideEnvironmentNgxMask, NgxMaskDirective } from 'ngx-mask';
 import { AlertComponent } from './alert/alert.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { AlertComponent } from './alert/alert.component';
     ModalComponent,
     TabsComponent,
     TabscontainerComponent,
-    AlertComponent
+    AlertComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { AlertComponent } from './alert/alert.component';
     ModalComponent,
     TabsComponent,
     TabscontainerComponent,
-    AlertComponent
+    AlertComponent,
+    ProfileComponent
   ],
   providers : [provideEnvironmentNgxMask()]
 })

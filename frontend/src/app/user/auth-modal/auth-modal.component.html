@@ -1,12 +1,14 @@
-<app-modal>
-        <p class="text-2xl font-bold" heading>Your Account</p>  
+<ng-container *ngIf="!(auth.isAuthenticatedDelay$ | async)">
+    <app-modal>
+        <p class="text-2xl font-bold text-white heading">Your Account</p>  
           <!-- Tabs -->
             <app-tabscontainer>
-                <app-tabs tabTitle="Register" >
+                <app-tabs tabTitle="Register">
                     <app-register></app-register> 
                 </app-tabs>
                 <app-tabs tabTitle="Login">
                     <app-login></app-login>
                 </app-tabs>
             </app-tabscontainer>           
-</app-modal>
+    </app-modal>
+</ng-container>

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class ModalService {
   visible : boolean = false;
 
 
-  constructor() { }
+  constructor( private route : Router ) { }
 
   ismodalOpen():boolean{
     return this.visible;
@@ -20,5 +21,6 @@ export class ModalService {
 
   closeModal(){
     this.visible = false;
+    this.route.navigate([''])
   }
 }

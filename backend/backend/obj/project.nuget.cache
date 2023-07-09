@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SNzmIQXLeCU+aAtBPLitLbBgtTrzoRS3EUeLmDpP3NoED/wTp/dEplega6/y4VYIT9yeZuYrmDPC0sgdjO0IAg==",
+  "dgSpecHash": "CYS6oNQ71ujDCs2dSUTQqxlADZnJ0UlBo5LmzrtI4NVkhgw3GSF3OeKJvfPqo9TW4/j8YFusSQDBHzJot0fs2Q==",
   "success": true,
   "projectFilePath": "D:\\workhub\\backend\\backend\\backend.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,8 @@
     "C:\\Users\\G3\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\G3\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\G3\\.nuget\\packages\\libuv\\1.10.0\\libuv.1.10.0.nupkg.sha512",
+    "C:\\Users\\G3\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.9\\microsoft.aspnet.webapi.client.5.2.9.nupkg.sha512",
+    "C:\\Users\\G3\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.2.9\\microsoft.aspnet.webapi.core.5.2.9.nupkg.sha512",
     "C:\\Users\\G3\\.nuget\\packages\\microsoft.aspnetcore\\2.0.0\\microsoft.aspnetcore.2.0.0.nupkg.sha512",
     "C:\\Users\\G3\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.0.0\\microsoft.aspnetcore.antiforgery.2.0.0.nupkg.sha512",
     "C:\\Users\\G3\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.0.0\\microsoft.aspnetcore.authentication.abstractions.2.0.0.nupkg.sha512",
@@ -244,6 +246,16 @@
     "C:\\Users\\G3\\.nuget\\packages\\system.xml.xpath.xdocument\\4.3.0\\system.xml.xpath.xdocument.4.3.0.nupkg.sha512"
   ],
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.WebApi.Core 5.2.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.WebApi.Core",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

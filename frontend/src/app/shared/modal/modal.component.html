@@ -15,12 +15,12 @@
         shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
 
         <!-- Add margin if you want to see some of the overlay behind the modal-->
-        <div class="py-4 text-left px-6">
+        <div class="py-4 text-left px-8">
           <!--Title-->
           <div class="flex justify-between items-center pb-4">
             <ng-content select = "[heading]" ></ng-content>
             <!-- Modal Close Button -->
-            <div class="modal-close cursor-pointer z-50" (click)="modal.closeModal()" >
+            <div class="modal-close cursor-pointer z-50 bg-white rounded-md ms-[440px]"  (click)="modal.closeModal()" >
               &#x2715;
             </div>
           </div>

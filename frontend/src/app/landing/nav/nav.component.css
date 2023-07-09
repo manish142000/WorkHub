@@ -4,3 +4,10 @@ ul li {
      @apply rounded py-[3px] px-[10px] text-[17px]
      /*hover:bg-slate-400 transition-all duration-300*/
 }
+
+body{
+     background-image: url("https://www.ktchnrebel.com/wp-content/uploads/2019/04/Company-Catering_credit-Quelle-Otto-Kantine-Kochwerk-Elbe-3-2.jpg");
+     background-color: black;
+}
+
+

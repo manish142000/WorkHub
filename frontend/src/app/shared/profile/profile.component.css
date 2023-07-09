@@ -1,0 +1,26 @@
+.profile {
+    height: 100%;
+    width: 100%;
+    background-image: url("https://www.ktchnrebel.com/wp-content/uploads/2019/04/Company-Catering_credit-Quelle-Otto-Kantine-Kochwerk-Elbe-3-2.jpg");
+    position: relative;
+}
+
+.box{
+    position: absolute;
+    height: 350px;
+    width: 350px;
+    box-shadow: 6px 10px 10px 10px rgb(202, 199, 199);
+    border: solid 4px;
+    border-color: black;
+    min-width: 300px;
+    left : 12%;
+    top : 15%;
+    border-radius: 6px;
+}
+
+p{
+    padding: 3px;
+    font-size: large;
+    font-style: Bold;
+    font-weight: 600;
+}

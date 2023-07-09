@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OrderData } from 'src/app/interfaces/order-data';
 import { OrderService } from 'src/app/services/order.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { OrderFormService } from 'src/app/services/order-form.service';
 
 @Component({
   selector: 'app-order',
@@ -19,9 +20,12 @@ export class OrderComponent {
   date6 : Date;
   date7: Date;
 
+
+
   constructor(
-    private auth : AuthService,
-    private Order : OrderService
+    public auth : AuthService,
+    private Order : OrderService,
+    public form : OrderFormService
   ) {
     this.date = new Date();
     this.date1 = new Date();
@@ -50,7 +54,6 @@ export class OrderComponent {
 
     this.auth.user.subscribe(
       (user) => {
-        console.log("subsciber ke ander aa rha! ");
         const formData : OrderData = {
           userEmail : user?.email,
           dateCreated : new Date(this.orderForm.value.createdDate as string), 
@@ -59,13 +62,19 @@ export class OrderComponent {
           breakfast : this.orderForm.value.breakFast     
         }
 
-        this.Order.placeOrder(formData).subscribe( 
-          (response) => {
-            console.log("Order place ho rha aur response aa rha! ", response);
+        this.Order.placeOrder(formData).subscribe(
+          (res) => {
+            this.orderForm.reset();
+          }
+          ,
+          (err) => {
+            alert(err);
           }
         )
 
       }
     )
+
+
   }
 }

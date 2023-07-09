@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 import { User } from '../models/user.model';
 import { delay, map, take } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,8 @@ export class AuthService {
 
   constructor(
     private http : HttpClient,
-    private cookie : CookieService
+    private cookie : CookieService,
+    private route : Router
   ) { 
     this.isAuthenticated$ = this.user.pipe(
       map( (user) => {
@@ -39,7 +41,7 @@ export class AuthService {
       } ),
     );
 
-    this.isAuthenticatedDelay$ = this.isAuthenticated$.pipe( 
+    this.isAuthenticatedDelay$ = this.isAuthenticated$.pipe(
       delay(1500)
     )
   } 
@@ -62,6 +64,8 @@ export class AuthService {
     if( this.expirationTimeout ){
       clearTimeout(this.expirationTimeout);
     }
+
+    this.route.navigate(["/"]);
   }
 
   autoLogout(expirationDuration : number){

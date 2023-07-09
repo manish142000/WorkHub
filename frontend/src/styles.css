@@ -4,10 +4,9 @@
 @tailwind utilities;
 
 body {
-    /*background-color: #161d31;*/
-  }
+     }
   
-  .material-icons.text-base {
+  /* /* .material-icons.text-base {
     font-size: inherit;
   }
   
@@ -73,7 +72,7 @@ body {
   }
   
   /* Video.js CSS START */
-  .vjs-theme-forest {
+  /*.vjs-theme-forest {
     --vjs-theme-forest--primary: rgb(129,140,248);
   }
   
@@ -131,9 +130,9 @@ body {
   
   .video-js .vjs-time-control {
     font-size: 2em;
-  }
+  } */
   /* Video.js CSS END */
-  
+  /*
   .ghost {
     border-radius: 150px 150px 7px 7px;
     -webkit-animation: ghost 1.5s ease-in-out alternate infinite;
@@ -249,4 +248,6 @@ body {
       opacity: 0;
     }
   }
-  
+  */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } 
